@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule	^([a-zA-Z\s]+)$	index.php?profile=$1 [NC,L]
+
+RewriteRule	^pub/([a-zA-Z\s]+)$	pub.php?profile=$1 [NC,L]

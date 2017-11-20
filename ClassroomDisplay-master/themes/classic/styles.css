@@ -1,0 +1,106 @@
+body {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+h2 {
+	text-align: center;
+	font-family: "Verdana"; 
+	/* font-size: 12px; */ 
+	color: #000000; 
+	font-weight: bolder;
+}
+
+.container {
+	width: 100%;
+	height: 100%;
+	background-color: #FFF;
+}
+
+.Zone1 {
+	position: absolute;
+	top: 0;
+	width:100%;
+	height: 20px;
+	background: #a1a2a4;
+}
+
+.header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	height: 77px;
+	background: #fff;
+	background-image: url(HautBackground.png);
+}
+
+.Zone4 {
+	position: absolute;
+	top: 80px;
+	width: 100%;
+	height: 21px;
+	background-color: #a1a2a4;
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #FFC68C;
+}
+
+.horloge {
+	position: absolute;
+	top: -350%;
+	left: 60%;
+	z-index: 0;
+	font-family: lcd2;
+	font-size: 3em;
+}
+
+.frame {
+	position: absolute;
+	margin-top: 2px;
+	top: 100px;
+	width: 100%;
+	background-color: #FFFFFF;
+}
+
+#error {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
+	color: red;
+	display: none;
+	background: #fff;
+}
+
+#loading {
+	position: absolute;
+	top: 5px;
+	left: 5px;
+	display: none;
+}
+
+#table-header {
+	text-align: left;
+	padding: 0 10px;
+	border-bottom: 1px solid black;
+}
+
+#table-body {
+	padding: 0 10px;
+}
+
+#table-body td {
+	border-top: 1px solid #ccc;
+	height: 25px;
+}
+
+#viewport {
+	overflow-y: hidden;
+}
+
+.calendar tr td:nth-child(1), .calendar tr th:nth-child(1) { width: 32%; }
+.calendar tr td:nth-child(2), .calendar tr th:nth-child(2) { width: 12%; }
+.calendar tr td:nth-child(3), .calendar tr th:nth-child(3) { width: 28%; }
+.calendar tr td:nth-child(4), .calendar tr th:nth-child(4) { width: 20%; }
+.calendar tr td:nth-child(5), .calendar tr th:nth-child(5) { width: 8%; }
