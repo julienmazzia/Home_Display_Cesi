@@ -3,6 +3,10 @@ var planningHeight = 0;
 var move = -1;
 var currentValue = 0;
 
+var countGlobal = 0;
+var countLocal = 0;
+var number = 0;
+var ok = false;
 var viewport = null;
 
 /**
@@ -33,72 +37,82 @@ function reloadData() {
 	$.ajax({
 		url: 'data.php?profile=' + profile,
 		success: function (data) {
+			number = data['data'].length / 8;
+			console.log(number);
 			console.log(data);
 			$('#error').hide();
 			var table = $('.card-container');
 			var color = "Grey lighten-1";
 			var count = 0;
+			countLocal = 0;
 			table.html("");
 			data['data'].forEach(function (item) {
-				if(count==0){
-					color = "grey lighten-3";
-					count = 1;
-				}else{
-					color = "grey lighten-2";
-					count = 0;
+				if((countGlobal+1 )* 8 > countLocal && countGlobal *8 <= countLocal){
+					if(count==0){
+						color = "grey lighten-3";
+						count = 1;
+					}else{
+						color = "grey lighten-2";
+						count = 0;
+					}
+
+					var div_a = document.createElement('div');
+					div_a.className = "col s3";
+
+					var div_b = document.createElement('div');
+					div_b.className = "card " + color;
+
+					var div_c = document.createElement('div');
+					div_c.className = "card-content";
+
+					var div_c_1 = document.createElement('div');
+					div_c_1.className = "row valign-wrapper center-align bordered";
+					var div_c_1_content = document.createElement('div');
+					div_c_1_content.className = "col s12";
+					div_c_1_content.textContent = "Session : " + item['NomSession'];
+					div_c_1.appendChild(div_c_1_content);
+
+					var div_c_2 = document.createElement('div');
+					div_c_2.className = "row valign-wrapper center-align bordered";
+					var div_c_2_content = document.createElement('div');
+					div_c_2_content.className = "col s5";
+					div_c_2_content.textContent = "Salle : " + item['NomSalle'];
+					var div_c_2_content2 = document.createElement('div');
+					div_c_2_content2.className = "col s7";
+					div_c_2_content2.textContent = "Matière : " + item['NomMatiere'];
+					div_c_2.appendChild(div_c_2_content);
+					div_c_2.appendChild(div_c_2_content2);
+
+					var div_c_3 = document.createElement('div');
+					div_c_3.className = "row valign-wrapper center-align bordered";
+					var div_c_3_content = document.createElement('div');
+					div_c_3_content.className = "col s12";
+					div_c_3_content.textContent = "Intervenant : " + item['NomIntervenant'];
+					div_c_3.appendChild(div_c_3_content);
+
+					var div_c_4 = document.createElement('div');
+					div_c_4.className = "row valign-wrapper center-align bordered";
+					var div_c_4_content = document.createElement('div');
+					div_c_4_content.className = "col s12";
+					div_c_4_content.textContent = "Période : " + item['HeureDebut'] + '-' + item['HeureFin'];
+					div_c_4.appendChild(div_c_4_content);
+					
+					div_c.appendChild(div_c_1);
+					div_c.appendChild(div_c_2);
+					div_c.appendChild(div_c_3);
+					div_c.appendChild(div_c_4);
+					div_b.appendChild(div_c);
+					div_a.appendChild(div_b);
+					table.append(div_a);
 				}
-
-				var div_a = document.createElement('div');
-				div_a.className = "col s3";
-
-				var div_b = document.createElement('div');
-				div_b.className = "card " + color;
-
-				var div_c = document.createElement('div');
-				div_c.className = "card-content";
-
-				var div_c_1 = document.createElement('div');
-				div_c_1.className = "row valign-wrapper center-align bordered";
-				var div_c_1_content = document.createElement('div');
-				div_c_1_content.className = "col s12";
-				div_c_1_content.textContent = "Session : " + item['NomSession'];
-				div_c_1.appendChild(div_c_1_content);
-
-				var div_c_2 = document.createElement('div');
-				div_c_2.className = "row valign-wrapper center-align bordered";
-				var div_c_2_content = document.createElement('div');
-				div_c_2_content.className = "col s6";
-				div_c_2_content.textContent = "Salle : " + item['NomSalle'];
-				var div_c_2_content2 = document.createElement('div');
-				div_c_2_content2.className = "col s6";
-				div_c_2_content2.textContent = "Matière : " + item['NomMatiere'];
-				div_c_2.appendChild(div_c_2_content);
-				div_c_2.appendChild(div_c_2_content2);
-
-				var div_c_3 = document.createElement('div');
-				div_c_3.className = "row valign-wrapper center-align bordered";
-				var div_c_3_content = document.createElement('div');
-				div_c_3_content.className = "col s12";
-				div_c_3_content.textContent = "Intervenant : " + item['NomIntervenant'];
-				div_c_3.appendChild(div_c_3_content);
-
-				var div_c_4 = document.createElement('div');
-				div_c_4.className = "row valign-wrapper center-align bordered";
-				var div_c_4_content = document.createElement('div');
-				div_c_4_content.className = "col s12";
-				div_c_4_content.textContent = "Période : " + item['HeureDebut'] + '-' + item['HeureFin'];
-				div_c_4.appendChild(div_c_4_content);
-				
-				div_c.appendChild(div_c_1);
-				div_c.appendChild(div_c_2);
-				div_c.appendChild(div_c_3);
-				div_c.appendChild(div_c_4);
-				div_b.appendChild(div_c);
-				div_a.appendChild(div_b);
-				table.append(div_a);
+				countLocal ++;
 			});
 			planningHeight = $('#table-body').height() - $('#viewport').height();
 			$('#loading').hide();
+			countGlobal ++;
+			if(countGlobal > number){
+				countGlobal = 0;
+			}
 		},
 		error: function () {
 			$('#error').text('Impossible de se connecter au serveur').show();
@@ -154,7 +168,7 @@ setInterval(function () {
 }, 1000);
 
 /**
- * Reload data each 5 minutes.
+ * Reload data each 10 seconds.
  */
 setInterval(function () {
 	reloadData();
