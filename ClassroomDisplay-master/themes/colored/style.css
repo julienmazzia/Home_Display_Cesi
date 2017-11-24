@@ -12,12 +12,17 @@
 	max-width: 245px;
 }
 
+#temp{
+	margin-top: 22px;
+}
+
 .footerData{
 	margin-left: 0px !important;
 }
 
 .footer-copyright{
 	margin-bottom: -30px !important;
+	height: 95px !important;
 }
 
 #horloge{
@@ -27,6 +32,7 @@
 
 #weatherImage{
 	padding-top: 18px !important;
+	margin-top: -20px !important;
 }
 
 body {
@@ -50,5 +56,10 @@ body {
 
   th{
   	font-size: 16px;
+  }
+
+  h6{
+  	font-size: 18px !important;
+  	   margin-top: -18px !important;
   }
 

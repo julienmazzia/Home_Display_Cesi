@@ -5,12 +5,26 @@ var currentValue = 0;
 
 var viewport = null;
 
+var val=0;
+var count = 0;
+
+var hideItem = 0;
+var showItem = 0;
+var limit = 0;
+
 /**
  * Startup code
  */
 $(function () {
 	//window["viewport"] = $('#viewport');
 	//viewport.css('height', ($(window).height() - 130) + 'px');
+	reloadData();
+	reloadData();
+	reloadData();
+	reloadData();
+	reloadData();
+	reloadData();
+	reloadData();
 	reloadData();
 	setActualDate();
 });
@@ -37,15 +51,17 @@ function reloadData() {
 			$('#error').hide();
 			var table = $('#table-body');
 			var strip = "";
-			var count = 0;
+			var first = 0;
 			table.html(' ');
+			console.log(count);
+			count = 0;
 			data['data'].forEach(function (item) {
-				if(count==0){
+				if(first==0){
 					strip = "strip";
-					count = 1;
+					first = 1;
 				}else{
 					strip="";
-					count = 0;
+					first = 0;
 				}
 				var tr = document.createElement('tr');
 				var td1 = document.createElement('td');
@@ -59,12 +75,14 @@ function reloadData() {
 				var td5 = document.createElement('td');
 				td5.textContent = item['HeureDebut'] + '-' + item['HeureFin'];
 				tr.className = strip;
+				tr.className = 'res'+count;
 				tr.appendChild(td1);
 				tr.appendChild(td2);
 				tr.appendChild(td3);
 				tr.appendChild(td4);
 				tr.appendChild(td5);
 				table.append(tr);
+				count ++;
 			});
 			planningHeight = $('#table-body').height() - $('#viewport').height();
 			$('#loading').hide();
@@ -74,6 +92,25 @@ function reloadData() {
 		}
 	});
 }
+
+function setVisible(){
+	hideItem = count;
+	for(hideItem; hideItem>=0;hideItem--){
+		$('.res'+hideItem).hide();
+	}
+	val = val + 11;
+	showItem = val;
+	limit = val-11;
+	for(showItem; showItem>=limit; showItem--){
+		$('.res'+showItem).fadeIn(2000);
+	}
+
+	if(val>count){
+		val=0;
+	}
+}
+
+setInterval(function(){setVisible();}, 12000);
 
 /**
  * Scrolling
@@ -134,15 +171,6 @@ function setActualDate(){
 	var day = today.getDate();
 	var month = today.getMonth()+1;
 	var year = today.getFullYear();
-
-	/*if(day<10){
-		day = '0'+day;
-	}
-
-	if(month<10){
-		month = '0'+month;
-	}*/
-	//var mydate = new Date(form.startDate.value);
 	var month = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
 "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"][today.getMonth()];
 	var str = '<h4>' +day + ' ' +month + ' ' + today.getFullYear() + '</h4>';
@@ -157,7 +185,7 @@ $(document).ready(function() {
     woeid: 'km',
     unit: 'c',
     success: function(weather) {
-      html = '<div clas="row"><h4 class="col s6"><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h4>';
+      html = '<div clas="row"><h4 id="temp" class="col s3 offset-s3"><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h4>';
       html += '<img id="weatherImage" class="col s6" src="'+weather.forecast[0].image+'"></div>';
   
       $("#weather").html(html);
@@ -167,5 +195,3 @@ $(document).ready(function() {
     }
   });
 });
-
-setInterval(function(){simpleWeather();}, 60000);
