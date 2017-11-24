@@ -48,7 +48,7 @@ function reloadData() {
 				}
 
 				var div_a = document.createElement('div');
-				div_a.className = "col s2";
+				div_a.className = "col s3";
 
 				var div_b = document.createElement('div');
 				div_b.className = "card " + color;
@@ -57,14 +57,14 @@ function reloadData() {
 				div_c.className = "card-content";
 
 				var div_c_1 = document.createElement('div');
-				div_c_1.className = "row valign-wrapper center-align";
+				div_c_1.className = "row valign-wrapper center-align bordered";
 				var div_c_1_content = document.createElement('div');
 				div_c_1_content.className = "col s12";
 				div_c_1_content.textContent = "Session : " + item['NomSession'];
 				div_c_1.appendChild(div_c_1_content);
 
 				var div_c_2 = document.createElement('div');
-				div_c_2.className = "row valign-wrapper center-align";
+				div_c_2.className = "row valign-wrapper center-align bordered";
 				var div_c_2_content = document.createElement('div');
 				div_c_2_content.className = "col s6";
 				div_c_2_content.textContent = "Salle : " + item['NomSalle'];
@@ -75,14 +75,14 @@ function reloadData() {
 				div_c_2.appendChild(div_c_2_content2);
 
 				var div_c_3 = document.createElement('div');
-				div_c_3.className = "row valign-wrapper center-align";
+				div_c_3.className = "row valign-wrapper center-align bordered";
 				var div_c_3_content = document.createElement('div');
 				div_c_3_content.className = "col s12";
 				div_c_3_content.textContent = "Intervenant : " + item['NomIntervenant'];
 				div_c_3.appendChild(div_c_3_content);
 
 				var div_c_4 = document.createElement('div');
-				div_c_4.className = "row valign-wrapper center-align";
+				div_c_4.className = "row valign-wrapper center-align bordered";
 				var div_c_4_content = document.createElement('div');
 				div_c_4_content.className = "col s12";
 				div_c_4_content.textContent = "Période : " + item['HeureDebut'] + '-' + item['HeureFin'];
