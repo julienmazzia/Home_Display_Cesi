@@ -37,13 +37,13 @@ function reloadData() {
 			var table = $('.card-container');
 			var color = "Grey lighten-1";
 			var count = 0;
-			table.innerHTML = "";
+			table.html("");
 			data['data'].forEach(function (item) {
 				if(count==0){
-					color = "Grey lighten-3";
+					color = "grey lighten-3";
 					count = 1;
 				}else{
-					color = "Grey lighten-1";
+					color = "grey lighten-2";
 					count = 0;
 				}
 
