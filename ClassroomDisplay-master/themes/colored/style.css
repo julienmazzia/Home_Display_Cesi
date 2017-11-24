@@ -1,5 +1,5 @@
 .strip{
-	background-color: #bdbdbd !important;
+	background-color: #eeeeee !important;
 }
 
 .page-footer{
@@ -16,6 +16,19 @@
 	margin-left: 0px !important;
 }
 
+.footer-copyright{
+	margin-bottom: -30px !important;
+}
+
+#horloge{
+	margin-top: 10px !important;
+	margin-bottom: -20px !important;
+}
+
+#weatherImage{
+	padding-top: 18px !important;
+}
+
 body {
     display: flex;
     min-height: 100vh;
@@ -29,3 +42,13 @@ body {
   nav{
   	height: 102px !important;
   }
+
+  td{
+  	font-size: 18px;
+  	font-weight: bold;
+  }
+
+  th{
+  	font-size: 16px;
+  }
+
