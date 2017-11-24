@@ -12,6 +12,7 @@ $(function () {
 	//window["viewport"] = $('#viewport');
 	//viewport.css('height', ($(window).height() - 130) + 'px');
 	reloadData();
+	setActualDate();
 });
 
 /*$(window).resize(function () {
@@ -157,4 +158,45 @@ setInterval(function () {
  */
 setInterval(function () {
 	reloadData();
-}, 5 * 60 * 1000);
+}, 10 * 1000);
+
+function setActualDate(){
+	var today = new Date();
+	var day = today.getDate();
+	var month = today.getMonth()+1;
+	var year = today.getFullYear();
+
+	/*if(day<10){
+		day = '0'+day;
+	}
+
+	if(month<10){
+		month = '0'+month;
+	}*/
+	//var mydate = new Date(form.startDate.value);
+	var month = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin",
+"Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"][today.getMonth()];
+	var str = '<h4>' +day + ' ' +month + ' ' + today.getFullYear() + '</h4>';
+	$('#date').html(str);
+};
+
+setInterval(function(){setActualDate();}, 60000);
+
+$(document).ready(function() {
+  $.simpleWeather({
+    location: loc,
+    woeid: 'km',
+    unit: 'c',
+    success: function(weather) {
+      html = '<div clas="row"><h4 class="col s6"><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h4>';
+      html += '<img id="weatherImage" class="col s6" src="'+weather.forecast[0].image+'"></div>';
+  
+      $("#weather").html(html);
+    },
+    error: function(error) {
+      $("#weather").html('<p>'+error+'</p>');
+    }
+  });
+});
+
+setInterval(function(){simpleWeather();}, 60000);
