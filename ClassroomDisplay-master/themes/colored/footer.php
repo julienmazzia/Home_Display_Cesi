@@ -6,6 +6,7 @@
             <h6 class="col s3 footerData">Lien internet : <a href="http://www.cesi.fr">http://www.cesi.fr/</a></h6>
             <div class="col s3 offset-s1" id="weather"></div>
           </div>
+          <marquee bgcolor="white" id="info" scrollamount="6"><font id="slideText" size="5"></font></marquee>
         </footer>
 </body>
 </html>

@@ -19,14 +19,8 @@ $(function () {
 	//window["viewport"] = $('#viewport');
 	//viewport.css('height', ($(window).height() - 130) + 'px');
 	reloadData();
-	reloadData();
-	reloadData();
-	reloadData();
-	reloadData();
-	reloadData();
-	reloadData();
-	reloadData();
 	setActualDate();
+	setInfoText("hey");
 });
 
 /*$(window).resize(function () {
@@ -195,3 +189,8 @@ $(document).ready(function() {
     }
   });
 });
+
+	function setInfoText(text){
+		var marq  = $('marquee#info font');
+		$(marq).text(text);
+	}
