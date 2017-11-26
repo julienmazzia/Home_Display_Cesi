@@ -173,12 +173,18 @@ function setActualDate(){
 
 setInterval(function(){setActualDate();}, 60000);
 
+function setInfoText(text){
+		var marq  = $('marquee#info font');
+		$(marq).text(text);
+	}
+
 $(document).ready(function() {
   $.simpleWeather({
     location: loc,
     woeid: 'km',
     unit: 'c',
     success: function(weather) {
+    	console.log("weather");
       html = '<div clas="row"><h4 id="temp" class="col s3 offset-s3"><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h4>';
       html += '<img id="weatherImage" class="col s6" src="'+weather.forecast[0].image+'"></div>';
   
@@ -190,7 +196,24 @@ $(document).ready(function() {
   });
 });
 
-	function setInfoText(text){
-		var marq  = $('marquee#info font');
-		$(marq).text(text);
-	}
+function weather(){
+	$.simpleWeather({
+    location: loc,
+    woeid: 'km',
+    unit: 'c',
+    success: function(weather) {
+    	console.log(weather);
+      html = '<div clas="row"><h4 id="temp" class="col s3 offset-s3"><i class="icon-'+weather.code+'"></i> '+weather.temp+'&deg;'+weather.units.temp+'</h4>';
+      html += '<img id="weatherImage" class="col s6" src="'+weather.forecast[0].image+'"></div>';
+  
+      $("#weather").html(html);
+    },
+    error: function(error) {
+      $("#weather").html('<p>'+error+'</p>');
+    }
+  });
+}
+
+setInterval(function(){weather();}, 60000);
+
+	
